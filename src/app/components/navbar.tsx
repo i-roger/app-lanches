@@ -12,7 +12,7 @@ export default function Navbar() {
         </div>
         <div>
             <ul className="flex flex-row items-center gap-4 text-black">
-                <li className="bg-black p-2 text-[#FF870C] font-extrabold rounded cursor-pointer"><a>COMPRE AGORA!</a></li>
+                <li className="bg-black p-2 text-[#FF870C] font-extrabold rounded cursor-pointer"><button>COMPRE AGORA!</button></li>
                 <li className="hover:bg-[#FF870C]"><a>RESERVA</a></li>
                 <li><a>GALERIA</a></li>
                 <li><a>ENTRE EM CONTATO</a></li>
