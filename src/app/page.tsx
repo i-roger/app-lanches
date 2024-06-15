@@ -6,8 +6,6 @@ import Image from "next/image";
 
 import EsfihaQueijo from "../../../public/produtos/esfiha-queijo.png"
 
-import {abrirModal} from "@/app/acoes"
-
 export default function Home() {
 
   return (
