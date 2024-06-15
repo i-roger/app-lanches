@@ -24,21 +24,21 @@ export default function Home() {
         <div className="flex flex-wrap gap-7 p-5 justify-center">
           <Card nome="Esfiha de Queijo" 
           descricao="Ta muito baratoooo! 1" 
-          preco="2.50"
+          preco={2.50}
           imagemProduto="../../../public/produtos/esfiha-queijo.png"
           />
 
           <Card 
           nome="Esfiha de Carne"
           descricao="Ta muito baratoooo! 2" 
-          preco="3.00"
+          preco= {3.00}
           imagemProduto="../../../public/produtos/esfiha-queijo.png"
           />
 
           <Card 
           nome="Esfiha de Calabresa"
           descricao="Ta muito baratoooo! 3" 
-          preco="2.70"
+          preco={2.70}
           imagemProduto="../../../public/produtos/esfiha-queijo.png"
           />
         </div>
