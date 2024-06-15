@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Logo from "../../../public/LogoMeC.png"
 export default function Navbar() {
     return(
-    <div className="flex justify-between items-center px-7 py-4 text-[22px] max-sm:hidden bg-white">
+    <div className="flex justify-between items-center px-7 py-4 text-[22px] bg-white">
         <div className="">
         <Image className=""
       src={Logo}
