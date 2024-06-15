@@ -1,19 +1,26 @@
+import Image from 'next/image'
+import Logo from "../../../public/LogoMeC.png"
 export default function Navbar() {
     return(
-    <div className="flex justify-between items-center px-4 py-4 text-[27px] max-sm:hidden">
+    <div className="flex justify-between items-center px-7 py-4 text-[22px] max-sm:hidden bg-white">
         <div className="">
-            <a>MC</a>
+        <Image className=""
+      src={Logo}
+      width={300}
+      alt="Picture of the author"
+    />
         </div>
         <div>
-            <ul className="flex flex-row items-center gap-4">
-                <li className="bg-red-600 p-2 text-yellow-300 font-extrabold"><a>Compre Agora!</a></li>
-                <li><a>Reserva</a></li>
-                <li><a>Galeria</a></li>
-                <li><a>Entre em contato</a></li>
+            <ul className="flex flex-row items-center gap-4 text-black">
+                <li className="bg-black p-2 text-[#FF870C] font-extrabold rounded cursor-pointer"><a>COMPRE AGORA!</a></li>
+                <li className="hover:bg-[#FF870C]"><a>RESERVA</a></li>
+                <li><a>GALERIA</a></li>
+                <li><a>ENTRE EM CONTATO</a></li>
                 <li><a>LOJA?</a></li>
             </ul>
         </div>
     </div>
     )
 }
+
 //Localização , reserva, galeria, loja, entre em contato, compre agora!
