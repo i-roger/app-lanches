@@ -1,8 +1,6 @@
 'use client'
 import React, { useState } from "react"
 import Navbar from "@/app/components/navbar";
-import Anuncio from "@/app/components/anuncio";
-import Carrinho from "@/app/components/carrinho"
 import Image from "next/image"
 
 interface IBook {
