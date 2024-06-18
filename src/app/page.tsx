@@ -98,7 +98,7 @@ export default function Home() {
 
 
   return (
-    <>
+    <div>
     <header>
       <Navbar />
     </header>
@@ -114,7 +114,7 @@ export default function Home() {
         <div className="flex flex-wrap gap-7 p-5 justify-center">
 
           {books.map(book => (
-          <div className="w-[330px] flex justify-between flex-col bg-white rounded ring-[1px] drop-shadow-xl ring-gray-300">
+          <div key={book.id} className="w-[330px] flex justify-between flex-col bg-white rounded ring-[1px] drop-shadow-xl ring-gray-300">
             <div className="p-4 ">
               <p className="text-[32px] font-bold">{book.title}</p>
               <p>Descrição!</p>
@@ -178,8 +178,6 @@ export default function Home() {
             {/* <i class="fa fa-cart-plus text-lg text-white"></i> */}
         </button>
     </footer>
-
-    
-    </>
+    </div>
   );
 }
