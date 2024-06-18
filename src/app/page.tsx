@@ -6,6 +6,7 @@ import Image from "next/image"
 interface IBook {
   id:number,
   title:string,
+  descricao:string,
   price:number,
   img:string // Foi adicionado na interface "img": "string" -> pois passa o caminho da imagem.
 }
@@ -16,9 +17,9 @@ interface IShoppingCartItem {
 }
 
 const books: IBook[] = [
-  {id:1, title:"Esfiha de Queijo", price: 10.99, img:"/produtos/esfiha-queijo.png"},
-  {id:2, title:"Esfiha de Carne", price: 8.99, img:"/produtos/esfiha-queijo.png"},
-  {id:3, title:"Esfiha de Calabresa", price: 90.99, img:"/produtos/esfiha-queijo.png"}
+  {id:1, title:"Esfiha de Queijo", descricao:"A melhor esfiha de queijo que você vai provar!", price: 10.99, img:"/produtos/esfiha-queijo.png"},
+  {id:2, title:"Esfiha de Carne", descricao:"", price: 8.99, img:"/produtos/esfiha-queijo.png"},
+  {id:3, title:"Esfiha de Calabresa", descricao:"", price: 90.99, img:"/produtos/esfiha-queijo.png"}
 ]
 
 export default function Home() {
@@ -114,20 +115,20 @@ export default function Home() {
         <div className="flex flex-wrap gap-7 p-5 justify-center">
 
           {books.map(book => (
-          <div key={book.id} className="w-[330px] flex justify-between flex-col bg-white rounded ring-[1px] drop-shadow-xl ring-gray-300">
+          <div key={book.id} className="w-[330px] flex justify-between flex-col bg-white rounded ring-[1px] drop-shadow-xl ring-gray-300 mb-10">
             <div className="p-4 ">
               <p className="text-[32px] font-bold">{book.title}</p>
-              <p>Descrição!</p>
+              <p>{book.descricao}</p>
             </div>
             <Image width={300} height={300} alt="" src={book.img}/>
 
-            <div className="w-[330px] h-[70px] p-4 flex justify-between">
-              <div id="preço" className="flex items-center justify-center text-[32px]">
+            <div className="bg-zinc-100 h-[70px] p-4 flex justify-between">
+              <div id="preço" className="flex items-center justify-center text-[24px]">
                 <p>R${book.price}</p>
               </div>
-              <button className="flex items-center justify-center px-4 py-5 text-sm font-bold bg-[#FF870C] text-black rounded-full" 
+              <button className="flex items-center justify-center px-2 py-5 text-sm font-bold bg-[#FF870C] hover:bg-[#ff9b37] active:bg-[#b96816] rounded-full" 
               onClick={() => handleAddToCart(book.id)}>
-                Add to Cart
+                Adicionar ao Carrinho
               </button>
             </div>
           </div>))}
@@ -154,7 +155,7 @@ export default function Home() {
               </div>
             </div>
             <div className="flex items-center">
-              <button className="p-2 bg-red-500 rounded-full" onClick={() => handleRemoveFromCart(item.product.id)}>Remove</button>
+              <button className="p-2 bg-red-500 rounded-full" onClick={() => handleRemoveFromCart(item.product.id)}>Remover</button>
             </div>
         </div>))}
         </div>
