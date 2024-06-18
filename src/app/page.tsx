@@ -1,12 +1,103 @@
+'use client'
+import React, { useState } from "react"
 import Navbar from "@/app/components/navbar";
-import Card from "@/app/components/card";
 import Anuncio from "@/app/components/anuncio";
 import Carrinho from "@/app/components/carrinho"
-import Image from "next/image";
+import Image from "next/image"
 
-import EsfihaQueijo from "../../../public/produtos/esfiha-queijo.png"
+interface IBook {
+  id:number,
+  title:string,
+  price:number,
+  img:string // Foi adicionado na interface "img": "string" -> pois passa o caminho da imagem.
+}
+
+interface IShoppingCartItem {
+  product: IBook
+  quantity: number
+}
+
+const books: IBook[] = [
+  {id:1, title:"Esfiha de Queijo", price: 10.99, img:"/produtos/esfiha-queijo.png"},
+  {id:2, title:"Esfiha de Carne", price: 8.99, img:"/produtos/esfiha-queijo.png"},
+  {id:3, title:"Esfiha de Calabresa", price: 90.99, img:"/produtos/esfiha-queijo.png"}
+]
 
 export default function Home() {
+
+  const [shoppingCart, setShoppingCart] = useState<IShoppingCartItem[]>([])
+  
+  const handleAddToCart = (id: number) => {
+    const book = books.find(book => book.id === id)
+    const alreadyInShoppingCart = shoppingCart.find(item => item.product.id === id)
+    
+    // if book is in the shopping cart
+    if(alreadyInShoppingCart) {
+      const newShoppingCart: IShoppingCartItem[] = shoppingCart.map(item => {
+        if (item.product.id === id) ({
+          ...item,
+          quantity: item.quantity++
+        })
+        return item
+      })
+      setShoppingCart(newShoppingCart)
+      return
+    }
+
+    // if book is not in the shopping cart
+
+    const cartItem : IShoppingCartItem = {
+      product: book!,
+      quantity: 1,
+    }
+    const newShoppingCart: IShoppingCartItem[] = [...shoppingCart, cartItem]
+    setShoppingCart(newShoppingCart)
+  }
+
+  const handleRemoveFromCart = (id: number) => {
+    const alreadyInShoppingCart = shoppingCart.find(
+      (item) => item.product.id === id
+    )
+
+    if(alreadyInShoppingCart!.quantity > 1) {
+      const newShoppingCart: IShoppingCartItem[] = shoppingCart.map(item => {
+        if (item.product.id === id) ({
+          ...item,
+          quantity: item.quantity--
+        })
+        return item
+      })
+      setShoppingCart(newShoppingCart)
+      return
+    }
+
+    //if there is only one item with the id in the cart
+    const newShoppingCart: IShoppingCartItem[] = shoppingCart.filter(item => item.product.id !== id)
+    setShoppingCart(newShoppingCart)
+  }
+
+  const totalCart = shoppingCart.reduce((total, current) => {
+    return total + (current.product.price * current.quantity)
+  }, 0)
+
+  const totalQuantity = shoppingCart.reduce((total, current) => {
+    return total + current.quantity
+  },0)
+
+
+  // Funções para Modal!
+  const abrirModal = () => {
+    let modal = document.getElementById("carrinho-modal")!
+    modal.style.display = "flex"
+  }
+
+  const btnFecharModal = () => {
+    let modal = document.getElementById("carrinho-modal")!
+    modal.style.display = "none"
+  }
+
+
+
 
   return (
     <>
@@ -20,27 +111,30 @@ export default function Home() {
           <h1 className="text-[32px] text-black font-bold">Esfihas</h1>  
         </div>
         {/* Divisão */}
-        {/* Produtos Esfiha */}
+
+        {/* Cards Produtos Esfiha */}
         <div className="flex flex-wrap gap-7 p-5 justify-center">
-          <Card nome="Esfiha de Queijo" 
-          descricao="Ta muito baratoooo! 1" 
-          preco={2.50}
-          imagemProduto="../../../public/produtos/esfiha-queijo.png"
-          />
 
-          <Card 
-          nome="Esfiha de Carne"
-          descricao="Ta muito baratoooo! 2" 
-          preco= {3.00}
-          imagemProduto="../../../public/produtos/esfiha-queijo.png"
-          />
+          {books.map(book => (
+          <div className="w-[330px] flex justify-between flex-col bg-white rounded ring-[1px] drop-shadow-xl ring-gray-300">
+            <div className="p-4 ">
+              <p className="text-[32px] font-bold">{book.title}</p>
+              <p>Descrição!</p>
+            </div>
+            <Image width={300} height={300} alt="" src={book.img}/>
 
-          <Card 
-          nome="Esfiha de Calabresa"
-          descricao="Ta muito baratoooo! 3" 
-          preco={2.70}
-          imagemProduto="../../../public/produtos/esfiha-queijo.png"
-          />
+            <div className="w-[330px] h-[70px] p-4 flex justify-between">
+              <div id="preço" className="flex items-center justify-center text-[32px]">
+                <p>R${book.price}</p>
+              </div>
+              <button className="flex items-center justify-center px-4 py-5 text-sm font-bold bg-[#FF870C] text-black rounded-full" 
+              onClick={() => handleAddToCart(book.id)}>
+                Add to Cart
+              </button>
+            </div>
+          </div>))}
+
+
         </div>
         {/* Produtos Esfiha */}
       </div>
@@ -50,9 +144,17 @@ export default function Home() {
       <div className="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px]">
         <h2 className="text-center font-bold text-2xl mb-2">Meu Carrinho</h2>
 
-        <div id="carrinho-items" className="flex flex-col justify-between mb-2"></div>
+        <div id="carrinho-items" className="flex flex-col justify-between mb-2">
+        {shoppingCart.map((item) => (<div>
+          <p>Book: {item.product.title}</p>
+          <p>Preço: {item.product.price}</p>
+          <p>Quantidade: {(item.quantity)}</p>
+          <p>Total: {(item.quantity * item.product.price).toFixed(2)}</p>
+          <button onClick={() => handleRemoveFromCart(item.product.id)}>Remove</button>
+        </div>))}
+        </div>
 
-        <p className="font-bold">Total:<span id="carrinho-total">0.00</span></p>
+        <p className="font-bold">Total: <span id="carrinho-total">R${totalCart.toFixed(2)}</span></p>
 
         <p className="font-bold mt-4">Endereço de Entrega:</p>
         <input
@@ -64,17 +166,16 @@ export default function Home() {
           <p className="text-red-500 hidden" id="address-warn">Digite seu endereço completo!</p>
 
           <div className="flex items-center justify-between mt-5 w-full">
-            <button id="close-modal-btn">Fechar</button>
+            <button onClick={btnFecharModal} id="close-modal-btn">Fechar</button>
             <button id="checkout-btn" className="bg-green-500 text-white px-4 py-1 rounded">Finalizar Pedidos</button>
           </div>
-
-
       </div>
     </div>
+
     {/* MODAL */}
     <footer className="flex items-center justify-center w-full bg-red-500 py-2 fixed bottom-0 z-40">
-      <button id="carrinho-btn" className="flex items-center gap-2 font-bold text-white">
-            (<span id="card-count">2</span>)
+      <button onClick={abrirModal} id="carrinho-btn" className="flex items-center gap-2 font-bold text-white">
+            (<span id="card-count">{totalQuantity}</span>)
             Ver Carrinho
             {/* <i class="fa fa-cart-plus text-lg text-white"></i> */}
         </button>

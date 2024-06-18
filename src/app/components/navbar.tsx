@@ -1,5 +1,6 @@
 import Image from 'next/image'
-import Logo from "../../../public/LogoMeC.png"
+import Logo from "@/app/assets/LogoMeC.png"
+
 export default function Navbar() {
     return(
     <div className="flex justify-between items-center px-7 py-4 text-[22px] bg-white">
