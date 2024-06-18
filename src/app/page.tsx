@@ -137,6 +137,7 @@ export default function Home() {
         {/* Produtos Esfiha */}
       </div>
     </main>
+
     {/* MODAL */}
     <div id="carrinho-modal" className="justify-center items-center w-full h-full bg-black/60 fixed top-0 left-0 z-[99] hidden">
       <div className="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px]"> {/* <---- Background do Card Modal */}
@@ -176,7 +177,7 @@ export default function Home() {
       </div>
     </div>
 
-    {/* MODAL */}
+    {/* FIM MODAL */}
     <footer className="flex items-center justify-center w-full bg-red-500 py-2 fixed bottom-0 z-40">
       <button onClick={abrirModal} id="carrinho-btn" className="flex items-center gap-2 font-bold text-white">
             (<span id="card-count">{totalQuantity}</span>)
