@@ -143,7 +143,7 @@ export default function Home() {
         <h2 className="text-center font-bold text-2xl mb-2">Meu Carrinho</h2>
 
         <div id="carrinho-items" className="flex flex-col justify-between mb-2">
-        {shoppingCart.map((item) => (<div>
+        {shoppingCart.map((item) => (<div key={item.product.id}>
           <p>Book: {item.product.title}</p>
           <p>Preço: {item.product.price}</p>
           <p>Quantidade: {(item.quantity)}</p>
