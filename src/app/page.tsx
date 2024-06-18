@@ -139,7 +139,7 @@ export default function Home() {
     </main>
 
     {/* MODAL */}
-    <div id="carrinho-modal" className="justify-center items-center w-full h-full bg-black/60 fixed top-0 left-0 z-[99] hidden">
+    <div id="carrinho-modal" className="justify-center items-center w-full h-full bg-black/60 fixed top-0 left-0 hidden">
       <div className="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px]"> {/* <---- Background do Card Modal */}
         <h2 className="text-center font-bold text-2xl mb-2">Meu Carrinho</h2>
         <div id="carrinho-items" className="flex flex-col justify-between mb-2">
@@ -170,7 +170,7 @@ export default function Home() {
           />
           <p className="text-red-500 hidden" id="address-warn">Digite seu endereço completo!</p>
 
-          <div className="flex items-center justify-between mt-5">
+          <div className="flex items-center justify-between mt-5 w-full">
             <button onClick={btnFecharModal} id="close-modal-btn">Fechar</button>
             <button id="checkout-btn" className="bg-green-500 text-white px-4 py-1 rounded">Finalizar Pedidos</button>
           </div>
