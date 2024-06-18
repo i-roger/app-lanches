@@ -98,7 +98,7 @@ export default function Home() {
 
 
   return (
-    <div>
+    <>
     <header>
       <Navbar />
     </header>
@@ -185,6 +185,6 @@ export default function Home() {
             {/* <i class="fa fa-cart-plus text-lg text-white"></i> */}
         </button>
     </footer>
-    </div>
+    </>
   );
 }
