@@ -170,7 +170,7 @@ export default function Home() {
           />
           <p className="text-red-500 hidden" id="address-warn">Digite seu endereço completo!</p>
 
-          <div className="flex items-center justify-between mt-5 w-full">
+          <div className="flex items-center justify-between mt-5">
             <button onClick={btnFecharModal} id="close-modal-btn">Fechar</button>
             <button id="checkout-btn" className="bg-green-500 text-white px-4 py-1 rounded">Finalizar Pedidos</button>
           </div>
