@@ -139,16 +139,22 @@ export default function Home() {
     </main>
     {/* MODAL */}
     <div id="carrinho-modal" className="justify-center items-center w-full h-full bg-black/60 fixed top-0 left-0 z-[99] hidden">
-      <div className="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px]">
+      <div className="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px]"> {/* <---- Background do Card Modal */}
         <h2 className="text-center font-bold text-2xl mb-2">Meu Carrinho</h2>
-
         <div id="carrinho-items" className="flex flex-col justify-between mb-2">
-        {shoppingCart.map((item) => (<div key={item.product.id}>
-          <p>Book: {item.product.title}</p>
-          <p>Preço: {item.product.price}</p>
-          <p>Quantidade: {(item.quantity)}</p>
-          <p>Total: {(item.quantity * item.product.price).toFixed(2)}</p>
-          <button onClick={() => handleRemoveFromCart(item.product.id)}>Remove</button>
+        {shoppingCart.map((item) => (
+          <div className="flex justify-between px-4 ring-[1px] shadow-md ring-gray-300 rounded" key={item.product.id}>
+            <div className="flex justify-center gap-2 items-center">
+              <Image className="p-2" alt="" width={100} height={300} src={item.product.img}/>
+              <div className="flex flex-col justify-center">
+                <p>{item.product.title}</p>
+                <p>Valor: R${item.product.price}</p>
+                <p>Quantidade: {(item.quantity)}x</p>
+              </div>
+            </div>
+            <div className="flex items-center">
+              <button className="p-2 bg-red-500 rounded-full" onClick={() => handleRemoveFromCart(item.product.id)}>Remove</button>
+            </div>
         </div>))}
         </div>
 
