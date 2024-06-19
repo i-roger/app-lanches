@@ -2,17 +2,19 @@ import Image from 'next/image'
 import Logo from "@/app/assets/LogoMeC.png"
 
 export default function Navbar() {
+
+
     return(
-    <div className="flex justify-between items-center px-7 py-4 text-[22px] bg-white">
-        <div className="">
-        <Image className=""
-      src={Logo}
-      width={300}
-      alt="Picture of the author"
-    />
-        </div>
+    <div className="flex justify-center md:justify-between items-center px-7 py-4 text-[22px] bg-white">
         <div>
-            <ul className="flex flex-row items-center gap-4 text-black">
+        <Image className=""
+            src={Logo}
+            width={300}
+            alt="Picture of the author"
+        />
+        </div>
+        <div className="items-center text-black hidden md:flex">
+            <ul className="flex gap-4">
                 <li className="bg-black p-2 text-[#FF870C] font-extrabold rounded cursor-pointer">
                     <button>COMPRE AGORA!</button>
                 </li>

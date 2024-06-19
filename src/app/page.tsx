@@ -3,18 +3,7 @@ import React, { useState } from "react"
 import Navbar from "@/app/components/navbar";
 import Image from "next/image"
 
-interface IBook {
-  id:number,
-  title:string,
-  descricao:string,
-  price:number,
-  img:string // Foi adicionado na interface "img": "string" -> pois passa o caminho da imagem.
-}
-
-interface IShoppingCartItem {
-  product: IBook
-  quantity: number
-}
+import {IBook, IShoppingCartItem} from "./interfaces/interfaces"
 
 const books: IBook[] = [
   {id:1, title:"Esfiha de Queijo", descricao:"A melhor esfiha de queijo que você vai provar!", price: 10.99, img:"/produtos/esfiha-queijo.png"},
@@ -86,23 +75,18 @@ export default function Home() {
 
   // Funções para Modal!
   const abrirModal = () => {
-    let modal = document.getElementById("carrinho-modal")!
+    let modal = document.getElementById("carrinho-modal") as HTMLElement;
     modal.style.display = "flex"
   }
 
   const btnFecharModal = () => {
-    let modal = document.getElementById("carrinho-modal")!
+    let modal = document.getElementById("carrinho-modal") as HTMLElement;
     modal.style.display = "none"
   }
 
-
-
-
   return (
     <>
-    <header>
-      <Navbar />
-    </header>
+    <Navbar />
     <main>
       <div id="menu" className="flex flex-col bg-slate-100">
         {/* Divisão Esfiha */}
