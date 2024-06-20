@@ -87,19 +87,18 @@ export default function Home() {
   return (
     <>
     <Navbar />
-    <main>
-      <div id="menu" className="flex flex-col bg-slate-100">
+      <div className="flex flex-col py-10 bg-slate-100">
         {/* Divisão Esfiha */}
-        <div className="flex p-5 justify-center">
+        <div className="flex justify-center">
           <h1 className="text-[32px] text-black font-bold">Esfihas</h1>  
         </div>
         {/* Divisão */}
 
-        {/* Cards Produtos Esfiha */}
+        {/* Cards */}
         <div className="flex flex-wrap gap-7 p-5 justify-center">
 
           {books.map(book => (
-          <div key={book.id} className="w-[330px] flex justify-between flex-col bg-white rounded ring-[1px] drop-shadow-xl ring-gray-300 mb-10">
+          <div key={book.id} className="w-[330px] flex justify-between flex-col bg-white rounded ring-[1px] drop-shadow ring-gray-300 mb-10">
             <div className="p-4 ">
               <p className="text-[32px] font-bold">{book.title}</p>
               <p>{book.descricao}</p>
@@ -119,9 +118,8 @@ export default function Home() {
 
 
         </div>
-        {/* Produtos Esfiha */}
+        {/* Cards */}
       </div>
-    </main>
 
     {/* MODAL */}
     <div id="carrinho-modal" className="justify-center items-center w-full h-full bg-black/60 fixed top-0 left-0 z-[99] hidden">
@@ -166,7 +164,7 @@ export default function Home() {
     <footer className="flex items-center justify-center w-full bg-red-500 py-2 fixed bottom-0 z-40">
       <button onClick={abrirModal} id="carrinho-btn" className="flex items-center gap-2 font-bold text-white">
             (<span id="card-count">{totalQuantity}</span>)
-            Ver Carrinho
+            Ver Carrinho 🛒
             {/* <i class="fa fa-cart-plus text-lg text-white"></i> */}
         </button>
     </footer>
