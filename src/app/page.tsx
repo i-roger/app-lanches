@@ -103,8 +103,9 @@ export default function Home() {
               <p className="text-[32px] font-bold">{book.title}</p>
               <p>{book.descricao}</p>
             </div>
-            <Image width={300} height={300} alt="" src={book.img}/>
-
+            <div className="flex justify-center">
+              <Image width={300} height={300} alt="" src={book.img}/>
+            </div>
             <div className="bg-zinc-100 h-[70px] p-4 flex justify-between">
               <div id="preço" className="flex items-center justify-center text-[24px]">
                 <p>R${book.price}</p>
