@@ -84,10 +84,32 @@ export default function Home() {
     modal.style.display = "none"
   }
 
+  const finalizarCompra = () => {
+    let addressInput = document.getElementById("addressInput") as HTMLFormElement;
+    let addressWarn = document.getElementById("addressWarn") as HTMLElement;
+
+    if(totalQuantity === 0) {
+      return console.log("Você não adicionou nada ao carrinho!");
+    }
+
+    if(addressInput.value === ""){
+      addressWarn.classList.remove("hidden")
+      addressInput.classList.add("border-red-500")
+      return console.log("O endereço está vazio!");
+    }
+    
+    if(addressInput.value !== ""){
+      addressInput.classList.remove("border-red-500")
+      addressWarn.classList.add("hidden")
+      console.log("PASSOU!")
+    }
+
+  }
+
   return (
     <>
     <Navbar />
-      <div className="flex flex-col py-10 bg-slate-100">
+      <div className="flex flex-col py-10">
         {/* Divisão Esfiha */}
         <div className="flex justify-center">
           <h1 className="text-[32px] text-black font-bold">Esfihas</h1>  
@@ -108,7 +130,7 @@ export default function Home() {
             </div>
             <div className="bg-zinc-100 h-[70px] p-4 flex justify-between">
               <div id="preço" className="flex items-center justify-center text-[24px]">
-                <p>R${book.price}</p>
+                <p>{book.price.toLocaleString("pt-BR",{style:"currency", currency:"BRL"})}</p>
               </div>
               <button className="flex items-center justify-center px-2 py-5 text-sm font-bold bg-[#FF870C] hover:bg-[#ff9b37] active:bg-[#b96816] rounded-full" 
               onClick={() => handleAddToCart(book.id)}>
@@ -133,7 +155,7 @@ export default function Home() {
               <Image className="p-2" alt="" width={100} height={300} src={item.product.img}/>
               <div className="flex flex-col justify-center">
                 <p>{item.product.title}</p>
-                <p>Valor: R${item.product.price}</p>
+                <p>Valor: {item.product.price.toLocaleString("pt-BR",{style:"currency", currency:"BRL"})}</p>
                 <p>Quantidade: {(item.quantity)}x</p>
               </div>
             </div>
@@ -143,20 +165,20 @@ export default function Home() {
         </div>))}
         </div>
 
-        <p className="font-bold">Total: <span id="carrinho-total">R${totalCart.toFixed(2)}</span></p>
+        <p className="font-bold">Total: <span id="carrinho-total">{totalCart.toLocaleString("pt-BR",{style:"currency", currency:"BRL"})}</span></p>
 
         <p className="font-bold mt-4">Endereço de Entrega:</p>
         <input
           type="text"
           placeholder="Digite seu endereço completo..."
-          id="address"
+          id="addressInput"
           className="w-full border-2 p-1 rounded my-1"
           />
-          <p className="text-red-500 hidden" id="address-warn">Digite seu endereço completo!</p>
+          <p className="text-red-500 hidden" id="addressWarn">Digite seu endereço completo!</p>
 
           <div className="flex items-center justify-between mt-5 w-full">
             <button onClick={btnFecharModal} id="close-modal-btn">Fechar</button>
-            <button id="checkout-btn" className="bg-green-500 text-white px-4 py-1 rounded">Finalizar Pedidos</button>
+            <button onClick={finalizarCompra} id="checkout-btn" className="bg-green-500 text-white px-4 py-1 rounded">Finalizar Pedidos</button>
           </div>
       </div>
     </div>

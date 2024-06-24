@@ -50,7 +50,7 @@ export default function Navbar() {
                 <li className="hover:bg-[#FF870C] cursor-pointer rounded p-2"><a>Galeria</a></li>
                 <li className="hover:bg-[#FF870C] cursor-pointer rounded p-2"><a>Contato</a></li>
             </ul>
-            <button className="p-4 rounded-full drop-shadow bg-[#FF870C] lg:hidden" onClick={abrir}>|||</button>
+            <button className="p-4 rounded-full drop-shadow bg-[#FF870C] lg:hidden" onClick={abrir}>Menu</button>
         </div>
         
 
