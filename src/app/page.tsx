@@ -167,9 +167,9 @@ export default function Home() {
 
     {/* MODAL */}
     <div id="carrinho-modal" className="justify-center items-center w-full h-full bg-black/60 fixed top-0 left-0 z-[99] hidden">
-      <div id="scroll-modal" className="flex flex-col h-[500px] bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px] overflow-y-scroll"> {/* <---- Background do Card Modal */}
+      <div id="scroll-modal" className="flex flex-col h-[500px] bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px] overflow-y-auto"> {/* <---- Background do Card Modal */}
         <h2 className="text-center font-bold text-2xl mb-5">Meu Carrinho</h2>
-        <div id="carrinho-items" className="flex flex-col justify-between mb-2">
+        <div id="carrinho-items" className="flex flex-col gap-4 justify-between">
         {shoppingCart.map((item) => (
           <div className="flex justify-between px-4 ring-[1px] shadow-md ring-gray-300 rounded" key={item.product.id}>
             <div className="flex justify-center gap-2 items-center">
@@ -181,19 +181,19 @@ export default function Home() {
               </div>
             </div>
             <div className="flex items-center">
-              <button className="p-2 bg-red-500 rounded-full" onClick={() => handleRemoveFromCart(item.product.id)}>Remover</button>
+              <button className="p-2 bg-red-500 text-white hover:bg-red-400 active:bg-red-800 rounded" onClick={() => handleRemoveFromCart(item.product.id)}>Remover</button>
             </div>
         </div>))}
         </div>
 
-        <p className="font-bold">Total: <span id="carrinho-total">{totalCart.toLocaleString("pt-BR",{style:"currency", currency:"BRL"})}</span></p>
+        <p className="font-bold my-5">Total: <span id="carrinho-total">{totalCart.toLocaleString("pt-BR",{style:"currency", currency:"BRL"})}</span></p>
 
-        <p className="font-bold mt-4">Nome:</p>
+        <p className="font-bold">Nome:</p>
         <input
           type="text"
           placeholder="Digite seu endereço completo..."
           id="nameInput"
-          className="w-full border-2 p-1 rounded my-1"
+          className="w-full border-2 p-1 rounded my-1 drop-shadow"
           />
           <p className="text-red-500 hidden" id="nameWarn">Digite seu nome!</p>
         
@@ -202,7 +202,7 @@ export default function Home() {
           type="text"
           placeholder="Digite seu número no formato -> (XX)XXXXX-XXXX"
           id="celularInput"
-          className="w-full border-2 p-1 rounded my-1"
+          className="w-full border-2 p-1 rounded my-1 drop-shadow"
           />
         
         <p className="font-bold mt-4">Email: (opcional)</p>
@@ -210,7 +210,7 @@ export default function Home() {
           type="text"
           placeholder="Digite seu email..."
           id="emailInput"
-          className="w-full border-2 p-1 rounded my-1"
+          className="w-full border-2 p-1 rounded my-1 drop-shadow"
           />
 
         <p className="font-bold mt-4">Endereço de Entrega:</p>
@@ -218,13 +218,13 @@ export default function Home() {
           type="text"
           placeholder="Digite seu endereço completo..."
           id="addressInput"
-          className="w-full border-2 p-1 rounded my-1"
+          className="w-full border-2 p-1 rounded my-1 drop-shadow"
           />
           <p className="text-red-500 hidden" id="addressWarn">Digite seu endereço completo!</p>
 
           <div className="flex items-center justify-between mt-5 w-full">
-            <button onClick={btnFecharModal} id="close-modal-btn">Fechar</button>
-            <button onClick={finalizarCompra} id="checkout-btn" className="bg-green-500 text-white px-4 py-1 rounded">Finalizar Pedidos</button>
+            <button onClick={btnFecharModal} id="close-modal-btn" className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-400 active:bg-red-800 drop-shadow">Fechar</button>
+            <button onClick={finalizarCompra} id="checkout-btn" className="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-400 active:bg-green-800 drop-shadow">Finalizar Pedidos</button>
           </div>
       </div>
     </div>
