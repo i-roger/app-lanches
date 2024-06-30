@@ -87,9 +87,24 @@ export default function Home() {
   const finalizarCompra = () => {
     let addressInput = document.getElementById("addressInput") as HTMLFormElement;
     let addressWarn = document.getElementById("addressWarn") as HTMLElement;
+    let nameInput = document.getElementById("nameInput") as HTMLFormElement;
+    let nameWarn = document.getElementById("nameWarn") as HTMLElement;
 
     if(totalQuantity === 0) {
       return console.log("Você não adicionou nada ao carrinho!");
+    }
+
+    // PROCURAR MELHORES FORMAS DE VALIDAR OS CAMPOS ABAIXO DO MODAL:
+    if(nameInput.value === ""){
+      nameWarn.classList.remove("hidden")
+      nameInput.classList.add("border-red-500")
+      return console.log("O nome está vazio!");
+    }
+
+    if(nameInput.value !== ""){
+      nameInput.classList.remove("border-red-500")
+      nameWarn.classList.add("hidden")
+      console.log("PASSOU!")
     }
 
     if(addressInput.value === ""){
@@ -101,6 +116,8 @@ export default function Home() {
     if(addressInput.value !== ""){
       addressInput.classList.remove("border-red-500")
       addressWarn.classList.add("hidden")
+      nameInput.classList.remove("border-red-500")
+      nameWarn.classList.add("hidden")
       console.log("PASSOU!")
     }
 
@@ -166,6 +183,31 @@ export default function Home() {
         </div>
 
         <p className="font-bold">Total: <span id="carrinho-total">{totalCart.toLocaleString("pt-BR",{style:"currency", currency:"BRL"})}</span></p>
+
+        <p className="font-bold mt-4">Nome:</p>
+        <input
+          type="text"
+          placeholder="Digite seu endereço completo..."
+          id="nameInput"
+          className="w-full border-2 p-1 rounded my-1"
+          />
+          <p className="text-red-500 hidden" id="nameWarn">Digite seu nome!</p>
+        
+        <p className="font-bold mt-4">Celular:</p>
+        <input
+          type="text"
+          placeholder="Digite seu número no formato -> (XX)XXXXX-XXXX"
+          id="celularInput"
+          className="w-full border-2 p-1 rounded my-1"
+          />
+        
+        <p className="font-bold mt-4">Email: (opcional)</p>
+        <input
+          type="text"
+          placeholder="Digite seu email..."
+          id="emailInput"
+          className="w-full border-2 p-1 rounded my-1"
+          />
 
         <p className="font-bold mt-4">Endereço de Entrega:</p>
         <input
