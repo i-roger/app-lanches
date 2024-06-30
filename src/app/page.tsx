@@ -75,11 +75,15 @@ export default function Home() {
 
   // Funções para Modal!
   const abrirModal = () => {
+    let body = document.querySelector("body") as HTMLElement;
+    body.style.overflow = "hidden" // Adicionado para remover o scroll do fundo de volta
     let modal = document.getElementById("carrinho-modal") as HTMLElement;
     modal.style.display = "flex"
   }
 
   const btnFecharModal = () => {
+    let body = document.querySelector("body") as HTMLElement;
+    body.style.overflow = "auto" // Adicionado para colocar o scroll do fundo de volta
     let modal = document.getElementById("carrinho-modal") as HTMLElement;
     modal.style.display = "none"
   }
@@ -163,8 +167,8 @@ export default function Home() {
 
     {/* MODAL */}
     <div id="carrinho-modal" className="justify-center items-center w-full h-full bg-black/60 fixed top-0 left-0 z-[99] hidden">
-      <div className="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px]"> {/* <---- Background do Card Modal */}
-        <h2 className="text-center font-bold text-2xl mb-2">Meu Carrinho</h2>
+      <div id="scroll-modal" className="flex flex-col h-[500px] bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px] overflow-y-scroll"> {/* <---- Background do Card Modal */}
+        <h2 className="text-center font-bold text-2xl mb-5">Meu Carrinho</h2>
         <div id="carrinho-items" className="flex flex-col justify-between mb-2">
         {shoppingCart.map((item) => (
           <div className="flex justify-between px-4 ring-[1px] shadow-md ring-gray-300 rounded" key={item.product.id}>
