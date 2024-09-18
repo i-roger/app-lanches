@@ -42,7 +42,7 @@ const books: IBook[] = [
   },
 ];
 
-export default function Home(id: number) {
+export default function Home() {
   const [shoppingCart, setShoppingCart] = useState<IShoppingCartItem[]>([]);
 
   const handleAddToCart = (id: number) => {
