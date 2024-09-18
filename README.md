@@ -9,3 +9,10 @@ Feito :
 - Fazer condição no Botão de finalização de compra | Feito função FinalizarCompra() ✅
 - Design Mobile Responsivo ✅
 - Colocar valores para aparecer no formato BRL -> "R$1,99" Usei a função .toLocaleString() ✅
+
+OBSERVAÇÃO CAROUSEL SWIPER :
+    ORGANIZAR:
+    -> O componente swiper.tsx que é o carousel, não funciona.
+    pois ao adicionar o item ao carrinho é gerado um erro.
+    não é possivel acessar a função em page.tsx para adicionar ao carrinho.
+    -> O carousel está funcionando em page.tsx normalmente. 
