@@ -1,8 +1,7 @@
 'use client'
-import Image from 'next/image'
-import Logo from "@/app/assets/LogoMeC.png"
 
 export default function Navbar() {
+  
     const abrir = () => {
         const menu = document.getElementById("menu") as HTMLElement;
         menu.classList.add('h-[100%]')
@@ -14,34 +13,10 @@ export default function Navbar() {
       }
 
     return(
-    // <div className="flex justify-center md:justify-between items-center px-7 py-4 text-[22px] bg-white">
-    //     <div>
-        // <Image className=""
-        //     src={Logo}
-        //     width={300}
-        //     alt="Picture of the author"
-        // />
-    //     </div>
-        // <div className="items-center text-black hidden md:flex">
-        //     <ul className="flex gap-4">
-        //         <li className="bg-black p-2 text-[#FF870C] font-extrabold rounded cursor-pointer">
-        //             <button>COMPRE AGORA!</button>
-        //         </li>
-        //         <li className="hover:bg-[#FF870C]"><a>RESERVA</a></li>
-        //         <li><a>GALERIA</a></li>
-        //         <li><a>ENTRE EM CONTATO</a></li>
-        //         <li><a>LOJA?</a></li>
-        //     </ul>
-        // </div>
-    // </div>
     <>
     <div className='w-full top-0 flex justify-evenly py-4 md:justify-evenly drop-shadow lg:static bg-white'> {/* Navbar */}
-        <div className=''>
-        <Image
-            src={Logo}
-            width={270}
-            alt="Picture of the author"
-        />
+        <div className='flex items-center text-3xl'>
+          <h1>Flash Lanches</h1>
         </div>
         <div className="flex items-center text-black lg:flex">
             <ul className="hidden items-center gap-4 lg:flex ">
