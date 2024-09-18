@@ -168,23 +168,8 @@ export default function Home(id: number) {
       <Navbar />
 
       {/* Carousel Swiper INICIO */}
-      <div className="p-4">
-        <Swiper
-          slidesPerView={1}
-          navigation={true}
-          loop={true}
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: false,
-          }}
-          pagination={{
-            dynamicBullets: true,
-          }}
-          modules={[Autoplay, Pagination, Navigation]}
-          className="w-[100%] h-[100%] rounded-[30px]"
-        >
-          
-          {books.map((book) => (
+      <Carousel>
+      {books.map((book) => (
             <SwiperSlide key={book.id}>
             <div
               key={book.id}
@@ -219,8 +204,7 @@ export default function Home(id: number) {
             </div>
             </SwiperSlide>
           ))}
-        </Swiper>
-      </div>
+      </Carousel>
       {/* Carousel Swiper FIM */}
 
       <div className="flex flex-col py-10">
