@@ -29,14 +29,14 @@ const books: IBook[] = [
   {
     id: 2,
     title: "Esfiha de Carne",
-    descricao: "",
+    descricao: "A melhor esfiha de queijo que você vai provar!",
     price: 8.99,
     img: "/produtos/esfiha-queijo.png",
   },
   {
     id: 3,
     title: "Esfiha de Calabresa",
-    descricao: "",
+    descricao: "A melhor esfiha de queijo que você vai provar!",
     price: 90.99,
     img: "/produtos/esfiha-queijo.png",
   },
@@ -170,19 +170,19 @@ export default function Home() {
       {/* Carousel Swiper INICIO */}
       <Carousel>
       {books.map((book) => (
-            <SwiperSlide key={book.id}>
+            <SwiperSlide className="p-4" key={book.id}>
             <div
               key={book.id}
-              className="w-[330px] flex justify-between flex-col bg-white rounded ring-[1px] drop-shadow ring-gray-300 mb-10"
+              className="w-[300px] flex justify-between flex-col bg-white rounded-3xl ring-[1px] drop-shadow ring-gray-300 mb-10"
             >
               <div className="p-4 ">
-                <p className="text-[32px] font-bold">{book.title}</p>
+                <p className="text-[1.7em] font-bold">{book.title}</p>
                 <p>{book.descricao}</p>
               </div>
-              <div className="flex justify-center">
-                <Image width={300} height={300} alt="" src={book.img} />
+              <div className="flex justify-center p-4">
+                <Image width={330} height={330} alt="" src={book.img} />
               </div>
-              <div className="bg-zinc-100 h-[70px] p-4 flex justify-between">
+              <div className="bg-zinc-100 h-[70px] p-2 flex justify-between rounded-b-3xl">
                 <div
                   id="preço"
                   className="flex items-center justify-center text-[24px]"
