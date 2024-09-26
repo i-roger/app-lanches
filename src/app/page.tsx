@@ -6,7 +6,7 @@ import Image from "next/image";
 import Carousel from './components/swiperCarousel/swiper'
 
 // Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
+import { SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -14,7 +14,6 @@ import "swiper/css/pagination";
 import "./components/swiperCarousel/styles.css";
 
 // import required modules
-import { Pagination, Autoplay, Navigation } from "swiper/modules";
 
 import { IBook, IShoppingCartItem } from "./interfaces/interfaces";
 
@@ -47,6 +46,7 @@ export default function Home() {
 
   const handleAddToCart = (id: number) => {
     const book = books.find((book) => book.id === id);
+    
     const alreadyInShoppingCart = shoppingCart.find(
       (item) => item.product.id === id
     );
