@@ -33,8 +33,7 @@ const bebidas: IBebidas[] = [
 
 export default function Testing() {
   return (
-    <div className="">
-        {/* TESTANDO MAPEAMENTO PARA COMPONENTES */}
+    <>
     <Carousel>
       {bebidas.map((bebida) => (
         <SwiperSlide key={bebida.id}>
@@ -45,12 +44,13 @@ export default function Testing() {
         </SwiperSlide>
       ))}
     </Carousel>
-
-    <div>
-    <h1 className="flex justify-center text-3xl font-bold">Bebidas</h1>
+        {/* TESTANDO MAPEAMENTO PARA COMPONENTES */}
+    <div className="">
+      <h1 className="text-3xl font-bold">Bebidas</h1>
     </div>
 
-      {/* TESTANDO COMPONENTE CARD */}
+    {/* TESTANDO COMPONENTE CARD */}
+    {/* O CARD ESTA CORTADO */}
     <Carousel>
     {bebidas.map((bebida) => (
         <SwiperSlide key={bebida.id}>
@@ -63,7 +63,6 @@ export default function Testing() {
         </SwiperSlide>
     ))}
     </Carousel>
-
-    </div>
+    </>
   );
 }
