@@ -1,5 +1,9 @@
 # Visualize a aplicação: https://lanches-one.vercel.app
 
+08.11.2024 - Feito ajustes fixos na página teste,
+usar esses ajustes no projeto original!
+
+
 Falta fazer :
 - Organização de INTERFACES e PRODUTOS!!!!!
 - Configurar componente de CARD. Seletor de QTD de itens?

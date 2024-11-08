@@ -167,6 +167,10 @@ export default function Home() {
     <>
       <Navbar />
 
+      <div className="bg-red-600 rounded-xl">
+        <a className="w-[300px] h-[150px]" href="/uisimples">Bebidas</a>
+      </div>
+
       {/* Carousel Swiper INICIO */}
       <Carousel>
       {books.map((book) => (
