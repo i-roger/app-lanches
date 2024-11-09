@@ -35,20 +35,6 @@ const books: IBook[] = [
     price: 90.99,
     img: "/produtos/esfiha-queijo.png",
   },
-  {
-    id: 3,
-    title: "Esfiha de Calabresa",
-    descricao: "A melhor esfiha de queijo que você vai provar!",
-    price: 90.99,
-    img: "/produtos/esfiha-queijo.png",
-  },
-  {
-    id: 3,
-    title: "Esfiha de Calabresa",
-    descricao: "A melhor esfiha de queijo que você vai provar!",
-    price: 90.99,
-    img: "/produtos/esfiha-queijo.png",
-  },
 ];
 
 export default function Home() {
@@ -122,15 +108,16 @@ export default function Home() {
   const abrirModal = () => {
     let body = document.querySelector("body") as HTMLElement;
     body.style.overflow = "hidden"; // Adicionado para remover o scroll do fundo de volta
-    let modal = document.getElementById("carrinho-modal") as HTMLElement;
+    let modal = document.getElementById("scroll-modal") as HTMLElement;
     modal.style.display = "flex";
+    modal.style.transform = "translateY(0%)";
   };
 
   const btnFecharModal = () => {
     let body = document.querySelector("body") as HTMLElement;
     body.style.overflow = "auto"; // Adicionado para colocar o scroll do fundo de volta
-    let modal = document.getElementById("carrinho-modal") as HTMLElement;
-    modal.style.display = "none";
+    let modal = document.getElementById("scroll-modal") as HTMLElement;
+    modal.style.transform = "translateY(100%)";
   };
 
   const finalizarCompra = () => {
@@ -236,13 +223,9 @@ export default function Home() {
       </div>
 
       {/* MODAL */}
-      <div
-        id="carrinho-modal"
-        className="justify-center items-center w-full h-full bg-black/60 fixed top-0 left-0 z-[99] hidden"
-      >
         <div
           id="scroll-modal"
-          className="flex flex-col bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px] overflow-y-auto"
+          className="scroll-modal translate-y-[100%] flex-col w-full h-full bg-white p-5 bg-black/60 fixed top-0 left-0 z-[99] flex"
         >
           {" "}
           {/* <---- Background do Card Modal */}
@@ -347,18 +330,22 @@ export default function Home() {
             </button>
           </div>
         </div>
-      </div>
+
 
       {/* FIM MODAL */}
-      <footer className="flex items-center justify-center w-full bg-red-500 py-2 fixed bottom-0 z-40">
+      {/* <footer className="flex items-center justify-center w-full bg-red-500 py-2 fixed bottom-0 z-40 hover:bg-red-400 cursor-pointer">
         <button
           onClick={abrirModal}
           id="carrinho-btn"
           className="flex items-center gap-2 font-bold text-white"
         >
           (<span id="card-count">{totalQuantity}</span>) Ver Carrinho 🛒
-          {/* <i class="fa fa-cart-plus text-lg text-white"></i> */}
         </button>
+      </footer> */}
+
+      <footer onClick={abrirModal} id="carrinho-btn" className="flex items-center justify-center w-full bg-red-500 py-2 fixed bottom-0 z-40 hover:bg-red-400 cursor-pointer gap-2 font-bold text-white">
+          (<span id="card-count">{totalQuantity}</span>) Ver Carrinho 🛒
+          {/* <i class="fa fa-cart-plus text-lg text-white"></i> */}
       </footer>
     </>
   );
