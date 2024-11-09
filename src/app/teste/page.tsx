@@ -225,7 +225,7 @@ export default function Home() {
       {/* MODAL */}
         <div
           id="scroll-modal"
-          className="scroll-modal translate-y-[100%] flex-col w-full h-full bg-white p-5 bg-black/60 fixed top-0 left-0 z-[99] flex"
+          className="scroll-modal translate-y-[100%] flex-col w-full h-full bg-white p-5 bg-black/60 fixed top-0 left-0 z-[99] overflow-y-auto flex"
         >
           {" "}
           {/* <---- Background do Card Modal */}
