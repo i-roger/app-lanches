@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Navbar from "@/app/components/navbar";
 import Image from "next/image";
+import { ulid } from 'ulid';
 
 // Import Swiper styles
 import "swiper/css";
@@ -15,21 +16,40 @@ import { IBook, IShoppingCartItem } from "@/app/interfaces/interfaces";
 
 const books: IBook[] = [
   {
-    id: 1,
+    tipo: "bebida",
+    id: ulid(),
+    title: "Coca-Cola",
+    descricao: "",
+    price: 12.0,
+    img: "/bebidas/pepsi-lata.png",
+  },
+  {
+    tipo: "bebida",
+    id: ulid(),
+    title: "Pepsi",
+    descricao: "",
+    price: 12.0,
+    img: "/bebidas/pepsi-lata.png",
+  },
+  {
+    tipo: "comida",
+    id: ulid(),
     title: "Esfiha de Queijo",
     descricao: "A melhor esfiha de queijo que você vai provar!",
     price: 10.99,
     img: "/produtos/esfiha-queijo.png",
   },
   {
-    id: 2,
+    tipo: "comida",
+    id: ulid(),
     title: "Esfiha de Carne",
     descricao: "A melhor esfiha de queijo que você vai provar!",
     price: 8.99,
     img: "/produtos/esfiha-queijo.png",
   },
   {
-    id: 3,
+    tipo: "comida",
+    id: ulid(),
     title: "Esfiha de Calabresa",
     descricao: "A melhor esfiha de queijo que você vai provar!",
     price: 90.99,
@@ -37,12 +57,16 @@ const books: IBook[] = [
   },
 ];
 
+const bebidas = books.filter((x) => x.tipo === "bebida");
+
+const comidas = books.filter((x) => x.tipo === "comida");
+
 export default function Home() {
   const [shoppingCart, setShoppingCart] = useState<IShoppingCartItem[]>([]);
-
-  const handleAddToCart = (id: number) => {
+  console.log(books)
+  const handleAddToCart = (id: any) => {
     const book = books.find((book) => book.id === id);
-    
+
     const alreadyInShoppingCart = shoppingCart.find(
       (item) => item.product.id === id
     );
@@ -71,7 +95,7 @@ export default function Home() {
     setShoppingCart(newShoppingCart);
   };
 
-  const handleRemoveFromCart = (id: number) => {
+  const handleRemoveFromCart = (id: any) => {
     const alreadyInShoppingCart = shoppingCart.find(
       (item) => item.product.id === id
     );
@@ -164,179 +188,246 @@ export default function Home() {
     <>
       <Navbar />
 
-      <div className="flex">
-        <div className="flex flex-col w-[96px] justify-center bg-red-600 p-4 rounded-xl">
-          <div className="flex justify-center">
-            ICONE
+      <div className="flex justify-center p-4 gap-4">
+
+        <div className="flex flex-col items-center justify-center">
+        <a className="text-center" href="#bebidas">
+          <div className="flex flex-col items-center justify-center bg-red-500 w-20 h-20 rounded-full">ICONE</div>
+        Bebidas</a>
+        </div>
+
+        <div className="flex flex-col items-center justify-center">
+          <a className="text-center" href="#comidas">
+            <div className="flex flex-col items-center justify-center bg-green-500 w-20 h-20 rounded-full">ICONE</div>
+          Comida</a>
+        </div>
+
+      </div>
+
+      <div id="wrapper" className="flex flex-col gap-8 pb-20">
+
+        <div> {/* SEÇÃO DE COMIDAS */}
+          <div className="flex justify-center py-4">
+            <h1 id="comidas" className="text-3xl text-black font-bold">Esfihas</h1>
           </div>
-          <a className="" href="/uisimples">Bebidas</a>
-        </div>
-      </div>
-
-      {/* Divisão Esfiha */}
-      <div className="flex justify-center py-4">
-          <h1 className="text-3xl text-black font-bold">Esfihas</h1>
-        </div>
-      {/* Divisão */}
-
-      <div className="flex flex-col pb-14">
-        {/* Cards */}
-        <div className="flex flex-col items-center gap-4">
-          {books.map((book) => (
-            <div
-              key={book.id}
-              className="flex bg-white rounded ring-[1px] drop-shadow ring-gray-300"
-            >
-              <div className="flex flex-col p-4 gap-4">
-                <div className="flex">
-                  <div className="flex flex-col justify-center">
-                    <p className="text-xl font-bold">{book.title}</p>
-                    <p className="">{book.descricao}</p>
-                  </div>
-                  <div>
-                    <Image width={128} height={128} alt="" src={book.img} />
-                  </div>
-                </div>
-                <div
-                  id="preço"
-                  className="flex justify-between text-[24px] font-bold"
-                >
-                  <p>
-                    {book.price.toLocaleString("pt-BR", {
-                      style: "currency",
-                      currency: "BRL",
-                    })}
-                  </p>
-                  <button
-                  className="p-2 text-sm font-bold bg-[#FF870C] hover:bg-[#ff9b37] active:bg-[#b96816] rounded-full"
-                  onClick={() => handleAddToCart(book.id)}
-                >
-                  Adicionar ao Carrinho
-                </button>
-                </div>
-              </div>
-              {/* final cartao */}
-            </div>
-          ))}
-        </div>
-        {/* Cards */}
-      </div>
-
-      {/* MODAL */}
-        <div
-          id="scroll-modal"
-          className="scroll-modal translate-y-[100%] flex-col w-full h-full bg-white p-5 fixed top-0 left-0 z-[99] overflow-y-auto flex"
-        >
-          {" "}
-          {/* <---- Background do Card Modal */}
-          <h2 className="text-center font-bold text-2xl mb-5">Meu Carrinho</h2>
-          <div
-            id="carrinho-items"
-            className="flex flex-col gap-4 justify-between"
-          >
-            {shoppingCart.map((item) => (
+          {/* Cards */}
+          <div id="card" className="flex flex-col items-center gap-4">
+            {comidas.map((book) => (
               <div
-                className="flex justify-between px-4 ring-[1px] shadow-md ring-gray-300 rounded"
-                key={item.product.id}
+                key={book.id}
+                className="flex w-full bg-white rounded ring-[1px] drop-shadow p-4 ring-gray-300 md:w-[400px]"
               >
-                <div className="flex justify-center gap-2 items-center">
-                  <Image
-                    className="p-2"
-                    alt=""
-                    width={100}
-                    height={300}
-                    src={item.product.img}
-                  />
-                  <div className="flex flex-col justify-center">
-                    <p>{item.product.title}</p>
+                <div className="flex flex-col w-full gap-4">
+                  
+                  <div className="flex justify-between w-full">
+                    <div className="flex flex-col justify-center">
+                      <p className="text-xl font-bold">{book.title}</p>
+                      <p>{book.descricao}</p>
+                    </div>
+                    <div className="flex justify-end">
+                      <Image width={128} height={128} alt="" src={book.img} />
+                    </div>
+                  </div>
+
+                  <div
+                    id="preço"
+                    className="flex justify-between text-[24px] font-bold"
+                  >
                     <p>
-                      Valor:{" "}
-                      {item.product.price.toLocaleString("pt-BR", {
+                      {book.price.toLocaleString("pt-BR", {
                         style: "currency",
                         currency: "BRL",
                       })}
                     </p>
-                    <p>Quantidade: {item.quantity}x</p>
+                    <button
+                      className="p-2 text-sm font-bold bg-[#FF870C] hover:bg-[#ff9b37] active:bg-[#b96816] rounded-full"
+                      onClick={() => handleAddToCart(book.id)}
+                    >
+                      Adicionar ao Carrinho
+                    </button>
                   </div>
                 </div>
-                <div className="flex items-center">
-                  <button
-                    className="p-2 bg-red-500 text-white hover:bg-red-400 active:bg-red-800 rounded"
-                    onClick={() => handleRemoveFromCart(item.product.id)}
-                  >
-                    Remover
-                  </button>
-                </div>
+                {/* final cartao */}
               </div>
             ))}
           </div>
-          <p className="font-bold my-5">
-            Total:{" "}
-            <span id="carrinho-total">
-              {totalCart.toLocaleString("pt-BR", {
-                style: "currency",
-                currency: "BRL",
-              })}
-            </span>
-          </p>
-          <p className="font-bold">Nome:</p>
-          <input
-            type="text"
-            placeholder="Digite seu endereço completo..."
-            id="nameInput"
-            className="w-full border-2 p-1 rounded my-1 drop-shadow"
-          />
-          <p className="text-red-500 hidden" id="nameWarn">
-            Digite seu nome!
-          </p>
-          <p className="font-bold mt-4">Celular:</p>
-          <input
-            type="text"
-            placeholder="Digite seu número no formato -> (XX)XXXXX-XXXX"
-            id="celularInput"
-            className="w-full border-2 p-1 rounded my-1 drop-shadow"
-          />
-          <p className="font-bold mt-4">Email: (opcional)</p>
-          <input
-            type="text"
-            placeholder="Digite seu email..."
-            id="emailInput"
-            className="w-full border-2 p-1 rounded my-1 drop-shadow"
-          />
-          <p className="font-bold mt-4">Endereço de Entrega:</p>
-          <input
-            type="text"
-            placeholder="Digite seu endereço completo..."
-            id="addressInput"
-            className="w-full border-2 p-1 rounded my-1 drop-shadow"
-          />
-          <p className="text-red-500 hidden" id="addressWarn">
-            Digite seu endereço completo!
-          </p>
-          <div className="flex items-center justify-between mt-5 w-full">
-            <button
-              onClick={btnFecharModal}
-              id="close-modal-btn"
-              className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-400 active:bg-red-800 drop-shadow"
-            >
-              Fechar
-            </button>
-            <button
-              onClick={finalizarCompra}
-              id="checkout-btn"
-              className="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-400 active:bg-green-800 drop-shadow"
-            >
-              Finalizar Pedidos
-            </button>
+        </div>
+        {/* FIM SEÇÃO DE COMIDAS */}
+
+        <div> {/* SEÇÃO DE BEBIDAS */}
+          <div className="flex justify-center py-4">
+            <h1 id="bebidas" className="text-3xl text-black font-bold">Bebidas</h1>
+          </div>
+          {/* Cards */}
+          <div id="card" className="flex flex-col items-center gap-4">
+            {bebidas.map((book) => (
+              <div
+                key={book.id}
+                className="flex w-full bg-white rounded ring-[1px] drop-shadow p-4 ring-gray-300 md:w-[400px]"
+              >
+                <div className="flex flex-col w-full gap-4">
+                  
+                  <div className="flex justify-between">
+                    <div className="w-[50%] flex flex-col justify-center">
+                      <p className="text-xl font-bold">{book.title}</p>
+                      <p>{book.descricao}</p>
+                    </div>
+                    <div className="w-[50%] flex justify-end">
+                      <Image width={48} height={96} alt="" src={book.img} />
+                    </div>
+                  </div>
+
+                  <div
+                    id="preço"
+                    className="flex justify-between text-[24px] font-bold"
+                  >
+                    <p>
+                      {book.price.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      })}
+                    </p>
+                    <button
+                      className="p-2 text-sm font-bold bg-[#FF870C] hover:bg-[#ff9b37] active:bg-[#b96816] rounded-full"
+                      onClick={() => handleAddToCart(book.id)}
+                    >
+                      Adicionar ao Carrinho
+                    </button>
+                  </div>
+                </div>
+                {/* final cartao */}
+              </div>
+            ))}
           </div>
         </div>
+        {/* FIM SEÇÃO DE BEBIDAS */}
+        
+
+      </div>
+      {/* FINAL WRAPPER */}
 
 
+
+
+
+
+      {/* MODAL */}
+      <div
+        id="scroll-modal"
+        className="scroll-modal translate-y-[100%] flex-col w-full h-full bg-white p-5 fixed top-0 left-0 z-[99] overflow-y-auto flex"
+      >
+        {" "}
+        {/* <---- Background do Card Modal */}
+        <h2 className="text-center font-bold text-2xl mb-5">Meu Carrinho</h2>
+        <div
+          id="carrinho-items"
+          className="flex flex-col gap-4 justify-between"
+        >
+          {shoppingCart.map((item) => (
+            <div
+              className="flex justify-between px-4 ring-[1px] shadow-md ring-gray-300 rounded"
+              key={item.product.id}
+            >
+              <div className="flex justify-center gap-2 items-center">
+                <div className="flex justify-center w-[48px] p-2">
+                <Image
+                  alt=""
+                  width={300}
+                  height={300}
+                  src={item.product.img}
+                />
+                </div>
+                <div className="flex flex-col justify-center">
+                  <p>{item.product.title}</p>
+                  <p>
+                    Valor:{" "}
+                    {item.product.price.toLocaleString("pt-BR", {
+                      style: "currency",
+                      currency: "BRL",
+                    })}
+                  </p>
+                  <p>Quantidade: {item.quantity}x</p>
+                </div>
+              </div>
+              <div className="flex items-center">
+                <button
+                  className="p-2 bg-red-500 text-white hover:bg-red-400 active:bg-red-800 rounded"
+                  onClick={() => handleRemoveFromCart(item.product.id)}
+                >
+                  Remover
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="font-bold my-5">
+          Total:{" "}
+          <span id="carrinho-total">
+            {totalCart.toLocaleString("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            })}
+          </span>
+        </p>
+        <p className="font-bold">Nome:</p>
+        <input
+          type="text"
+          placeholder="Digite seu endereço completo..."
+          id="nameInput"
+          className="w-full border-2 p-1 rounded my-1 drop-shadow"
+        />
+        <p className="text-red-500 hidden" id="nameWarn">
+          Digite seu nome!
+        </p>
+        <p className="font-bold mt-4">Celular:</p>
+        <input
+          type="text"
+          placeholder="Digite seu número no formato -> (XX)XXXXX-XXXX"
+          id="celularInput"
+          className="w-full border-2 p-1 rounded my-1 drop-shadow"
+        />
+        <p className="font-bold mt-4">Email: (opcional)</p>
+        <input
+          type="text"
+          placeholder="Digite seu email..."
+          id="emailInput"
+          className="w-full border-2 p-1 rounded my-1 drop-shadow"
+        />
+        <p className="font-bold mt-4">Endereço de Entrega:</p>
+        <input
+          type="text"
+          placeholder="Digite seu endereço completo..."
+          id="addressInput"
+          className="w-full border-2 p-1 rounded my-1 drop-shadow"
+        />
+        <p className="text-red-500 hidden" id="addressWarn">
+          Digite seu endereço completo!
+        </p>
+        <div className="flex items-center justify-between mt-5 w-full">
+          <button
+            onClick={btnFecharModal}
+            id="close-modal-btn"
+            className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-400 active:bg-red-800 drop-shadow"
+          >
+            Fechar
+          </button>
+          <button
+            onClick={finalizarCompra}
+            id="checkout-btn"
+            className="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-400 active:bg-green-800 drop-shadow"
+          >
+            Finalizar Pedidos
+          </button>
+        </div>
+      </div>
       {/* FIM MODAL */}
-
-      <footer onClick={abrirModal} id="carrinho-btn" className="flex items-center justify-center w-full bg-red-500 py-2 fixed bottom-0 z-40 hover:bg-red-400 cursor-pointer gap-2 font-bold text-white">
-          (<span id="card-count">{totalQuantity}</span>) Ver Carrinho 🛒
-          {/* <i class="fa fa-cart-plus text-lg text-white"></i> */}
+      <footer
+        onClick={abrirModal}
+        id="carrinho-btn"
+        className="flex items-center justify-center w-full bg-red-500 py-2 fixed bottom-0 z-40 hover:bg-red-400 cursor-pointer gap-2 font-bold text-white"
+      >
+        (<span id="card-count">{totalQuantity}</span>) Ver Carrinho 🛒
+        {/* <i class="fa fa-cart-plus text-lg text-white"></i> */}
       </footer>
     </>
   );

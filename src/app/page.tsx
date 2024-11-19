@@ -19,6 +19,23 @@ import { IBook, IShoppingCartItem } from "./interfaces/interfaces";
 
 const books: IBook[] = [
   {
+    tipo: "bebida",
+    id:1,
+    title: "Coca-Cola",
+    descricao: "",
+    price: 12.00,
+    img: ""
+  },
+  {
+    tipo: "bebida",
+    id:2,
+    title: "Pepsi",
+    descricao: "",
+    price: 12.00,
+    img: ""
+  },
+  {
+    tipo: "comida",
     id: 1,
     title: "Esfiha de Queijo",
     descricao: "A melhor esfiha de queijo que você vai provar!",
@@ -26,6 +43,7 @@ const books: IBook[] = [
     img: "/produtos/esfiha-queijo.png",
   },
   {
+    tipo: "comida",
     id: 2,
     title: "Esfiha de Carne",
     descricao: "A melhor esfiha de queijo que você vai provar!",
@@ -33,6 +51,7 @@ const books: IBook[] = [
     img: "/produtos/esfiha-queijo.png",
   },
   {
+    tipo: "comida",
     id: 3,
     title: "Esfiha de Calabresa",
     descricao: "A melhor esfiha de queijo que você vai provar!",
@@ -40,7 +59,7 @@ const books: IBook[] = [
     img: "/produtos/esfiha-queijo.png",
   },
 ];
-
+// const bebida = bebidas.find((bebida) => bebida.id === id);
 export default function Home() {
   const [shoppingCart, setShoppingCart] = useState<IShoppingCartItem[]>([]);
 
@@ -71,6 +90,7 @@ export default function Home() {
       product: book!,
       quantity: 1,
     };
+
     const newShoppingCart: IShoppingCartItem[] = [...shoppingCart, cartItem];
     setShoppingCart(newShoppingCart);
   };
@@ -107,6 +127,7 @@ export default function Home() {
   const totalQuantity = shoppingCart.reduce((total, current) => {
     return total + current.quantity;
   }, 0);
+
 
   // Funções para Modal!
   const abrirModal = () => {
@@ -162,6 +183,12 @@ export default function Home() {
       console.log("PASSOU!");
     }
   };
+
+
+  const bebidas = books.filter(x => x.tipo === "bebida");
+
+  const comidas = books.filter(x => x.tipo === "comida");
+
 
   return (
     <>
@@ -220,7 +247,53 @@ export default function Home() {
 
         {/* Cards */}
         <div className="flex flex-wrap gap-7 p-5 justify-center">
-          {books.map((book) => (
+          {comidas.map((book) => (
+            <div
+              key={book.id}
+              className="w-[330px] flex justify-between flex-col bg-white rounded ring-[1px] drop-shadow ring-gray-300 mb-10"
+            >
+              <div className="p-4 ">
+                <p className="text-[32px] font-bold">{book.title}</p>
+                <p>{book.descricao}</p>
+              </div>
+              <div className="flex justify-center">
+                <Image width={300} height={300} alt="" src={book.img} />
+              </div>
+              <div className="bg-zinc-100 h-[70px] p-4 flex justify-between">
+                <div
+                  id="preço"
+                  className="flex items-center justify-center text-[24px]"
+                >
+                  <p>
+                    {book.price.toLocaleString("pt-BR", {
+                      style: "currency",
+                      currency: "BRL",
+                    })}
+                  </p>
+                </div>
+                <button
+                  className="flex items-center justify-center px-2 py-5 text-sm font-bold bg-[#FF870C] hover:bg-[#ff9b37] active:bg-[#b96816] rounded-full"
+                  onClick={() => handleAddToCart(book.id)}
+                >
+                  Adicionar ao Carrinho
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+        {/* Cards */}
+      </div>
+
+      <div className="flex flex-col py-10">
+        {/* Divisão Esfiha */}
+        <div className="flex justify-center">
+          <h1 className="text-[32px] text-black font-bold">Bebidas</h1>
+        </div>
+        {/* Divisão */}
+
+        {/* Cards Bebidas */}
+        <div className="flex flex-wrap gap-7 p-5 justify-center">
+          {bebidas.map((book) => (
             <div
               key={book.id}
               className="w-[330px] flex justify-between flex-col bg-white rounded ring-[1px] drop-shadow ring-gray-300 mb-10"
