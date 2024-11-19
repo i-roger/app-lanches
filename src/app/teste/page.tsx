@@ -63,7 +63,7 @@ const comidas = books.filter((x) => x.tipo === "comida");
 
 export default function Home() {
   const [shoppingCart, setShoppingCart] = useState<IShoppingCartItem[]>([]);
-  console.log(books)
+
   const handleAddToCart = (id: any) => {
     const book = books.find((book) => book.id === id);
 
