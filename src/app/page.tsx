@@ -218,7 +218,8 @@ export default function Home() {
     const celular = 21999055127
     console.log(cartItems)
 
-    window.open(`https://wa.me/${celular}?text=${message} Endereço: ${addressInput.value} | \n Total: ${totalCart}`, "_blank")
+    // window.open(`https://wa.me/${celular}?text=${message} Endereço: ${addressInput.value} | \n Total: ${totalCart}`, "_blank")
+    window.open(`https://api.whatsapp.com/send/?phone=${celular}&text=${message}&type=phone_number&app_absent=0`, "_blank")
   };
 
   return (
