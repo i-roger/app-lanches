@@ -12,9 +12,25 @@ import "@/app/components/swiperCarousel/styles.css";
 
 // import required modules
 
-import { IBook, IShoppingCartItem } from "@/app/interfaces/interfaces";
+import { Iproduto, IShoppingCartItem } from "@/app/interfaces/interfaces";
 
-const books: IBook[] = [
+const produtos: Iproduto[] = [
+  {
+    tipo: "promocao",
+    id: ulid(),
+    title: "20 Esfihas de queijo",
+    descricao: "A melhor esfiha de queijo que você vai provar!",
+    price: 71.82,
+    img: "/produtos/esfiha-queijo.png",
+  },
+  {
+    tipo: "promocao",
+    id: ulid(),
+    title: "20 Esfihas de carne",
+    descricao: "A melhor esfiha de queijo que você vai provar!",
+    price: 89.99,
+    img: "/produtos/esfiha-queijo.png",
+  },
   {
     tipo: "bebida",
     id: ulid(),
@@ -36,7 +52,7 @@ const books: IBook[] = [
     id: ulid(),
     title: "Esfiha de Queijo",
     descricao: "A melhor esfiha de queijo que você vai provar!",
-    price: 10.99,
+    price: 3.99,
     img: "/produtos/esfiha-queijo.png",
   },
   {
@@ -52,26 +68,36 @@ const books: IBook[] = [
     id: ulid(),
     title: "Esfiha de Calabresa",
     descricao: "A melhor esfiha de queijo que você vai provar!",
-    price: 90.99,
+    price: 6.99,
+    img: "/produtos/esfiha-queijo.png",
+  },
+  {
+    tipo: "comida",
+    id: ulid(),
+    title: "Esfiha de Frango",
+    descricao: "A melhor esfiha de queijo que você vai provar!",
+    price: 4.99,
     img: "/produtos/esfiha-queijo.png",
   },
 ];
 
-const bebidas = books.filter((x) => x.tipo === "bebida");
+const promocao = produtos.filter((x) => x.tipo === "promocao");
 
-const comidas = books.filter((x) => x.tipo === "comida");
+const bebidas = produtos.filter((x) => x.tipo === "bebida");
+
+const comidas = produtos.filter((x) => x.tipo === "comida");
 
 export default function Home() {
   const [shoppingCart, setShoppingCart] = useState<IShoppingCartItem[]>([]);
 
   const handleAddToCart = (id: any) => {
-    const book = books.find((book) => book.id === id);
+    const produto = produtos.find((produto) => produto.id === id);
 
     const alreadyInShoppingCart = shoppingCart.find(
       (item) => item.product.id === id
     );
 
-    // if book is in the shopping cart
+    // if produto is in the shopping cart
     if (alreadyInShoppingCart) {
       const newShoppingCart: IShoppingCartItem[] = shoppingCart.map((item) => {
         if (item.product.id === id)
@@ -85,10 +111,10 @@ export default function Home() {
       return;
     }
 
-    // if book is not in the shopping cart
+    // if produto is not in the shopping cart
 
     const cartItem: IShoppingCartItem = {
-      product: book!,
+      product: produto!,
       quantity: 1,
     };
     const newShoppingCart: IShoppingCartItem[] = [...shoppingCart, cartItem];
@@ -182,6 +208,17 @@ export default function Home() {
       nameWarn.classList.add("hidden");
       console.log("PASSOU!");
     }
+
+    const cartItems = shoppingCart.map((item) => {
+      return (`${item.product.title} ---> Quantidade: (${item.quantity}) Preço: R$${item.product.price}) | `
+      )
+    }).join("")
+
+    const message = encodeURIComponent(cartItems)
+    const celular = 21999055127
+    console.log(cartItems)
+
+    window.open(`https://wa.me/${celular}?text=${message} Endereço: ${addressInput.value} | \n Total: ${totalCart}`, "_blank")
   };
 
   return (
@@ -206,26 +243,26 @@ export default function Home() {
 
       <div id="wrapper" className="flex flex-col gap-8 pb-20">
 
-        <div> {/* SEÇÃO DE COMIDAS */}
+      <div> {/* SEÇÃO DE PROMOÇÕES */}
           <div className="flex justify-center py-4">
-            <h1 id="comidas" className="text-3xl text-black font-bold">Esfihas</h1>
+            <h1 id="comidas" className="text-3xl text-black font-bold">Promoções</h1>
           </div>
           {/* Cards */}
-          <div id="card" className="flex flex-col items-center gap-4">
-            {comidas.map((book) => (
+          <div id="card" className="flex flex-col items-center gap-4 md:flex-row md:justify-center md:items-stretch md:flex-wrap">
+            {promocao.map((produto) => (
               <div
-                key={book.id}
+                key={produto.id}
                 className="flex w-full bg-white rounded ring-[1px] drop-shadow p-4 ring-gray-300 md:w-[400px]"
               >
                 <div className="flex flex-col w-full gap-4">
                   
                   <div className="flex justify-between w-full">
                     <div className="flex flex-col justify-center">
-                      <p className="text-xl font-bold">{book.title}</p>
-                      <p>{book.descricao}</p>
+                      <p className="text-xl font-bold">{produto.title}</p>
+                      <p>{produto.descricao}</p>
                     </div>
                     <div className="flex justify-end">
-                      <Image width={128} height={128} alt="" src={book.img} />
+                      <Image width={128} height={128} alt="" src={produto.img} />
                     </div>
                   </div>
 
@@ -234,14 +271,62 @@ export default function Home() {
                     className="flex justify-between text-[24px] font-bold"
                   >
                     <p>
-                      {book.price.toLocaleString("pt-BR", {
+                      {produto.price.toLocaleString("pt-BR", {
                         style: "currency",
                         currency: "BRL",
                       })}
                     </p>
                     <button
                       className="p-2 text-sm font-bold bg-[#FF870C] hover:bg-[#ff9b37] active:bg-[#b96816] rounded-full"
-                      onClick={() => handleAddToCart(book.id)}
+                      onClick={() => handleAddToCart(produto.id)}
+                    >
+                      Adicionar ao Carrinho
+                    </button>
+                  </div>
+                </div>
+                {/* final cartao */}
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* FIM SEÇÃO DE PROMOÇÕES */}
+
+        <div> {/* SEÇÃO DE COMIDAS */}
+          <div className="flex justify-center py-4">
+            <h1 id="comidas" className="text-3xl text-black font-bold">Esfihas por unidade</h1>
+          </div>
+          {/* Cards */}
+          <div id="card" className="flex flex-col items-center gap-4 md:flex-row md:justify-center md:items-stretch md:flex-wrap">
+            {comidas.map((produto) => (
+              <div
+                key={produto.id}
+                className="flex w-full bg-white rounded ring-[1px] drop-shadow p-4 ring-gray-300 md:w-[400px]"
+              >
+                <div className="flex flex-col w-full gap-4">
+                  
+                  <div className="flex justify-between w-full">
+                    <div className="flex flex-col justify-center">
+                      <p className="text-xl font-bold">{produto.title}</p>
+                      <p>{produto.descricao}</p>
+                    </div>
+                    <div className="flex justify-end">
+                      <Image width={128} height={128} alt="" src={produto.img} />
+                    </div>
+                  </div>
+
+                  <div
+                    id="preço"
+                    className="flex justify-between text-[24px] font-bold"
+                  >
+                    <p>
+                      {produto.price.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      })}
+                    </p>
+                    <button
+                      className="p-2 text-sm font-bold bg-[#FF870C] hover:bg-[#ff9b37] active:bg-[#b96816] rounded-full"
+                      onClick={() => handleAddToCart(produto.id)}
                     >
                       Adicionar ao Carrinho
                     </button>
@@ -259,21 +344,21 @@ export default function Home() {
             <h1 id="bebidas" className="text-3xl text-black font-bold">Bebidas</h1>
           </div>
           {/* Cards */}
-          <div id="card" className="flex flex-col items-center gap-4">
-            {bebidas.map((book) => (
+          <div id="card" className="flex flex-col items-center gap-4 md:flex-row md:justify-center md:items-stretch">
+            {bebidas.map((produto) => (
               <div
-                key={book.id}
+                key={produto.id}
                 className="flex w-full bg-white rounded ring-[1px] drop-shadow p-4 ring-gray-300 md:w-[400px]"
               >
                 <div className="flex flex-col w-full gap-4">
                   
                   <div className="flex justify-between">
                     <div className="w-[50%] flex flex-col justify-center">
-                      <p className="text-xl font-bold">{book.title}</p>
-                      <p>{book.descricao}</p>
+                      <p className="text-xl font-bold">{produto.title}</p>
+                      <p>{produto.descricao}</p>
                     </div>
                     <div className="w-[50%] flex justify-end">
-                      <Image width={48} height={96} alt="" src={book.img} />
+                      <Image width={48} height={96} alt="" src={produto.img} />
                     </div>
                   </div>
 
@@ -282,14 +367,14 @@ export default function Home() {
                     className="flex justify-between text-[24px] font-bold"
                   >
                     <p>
-                      {book.price.toLocaleString("pt-BR", {
+                      {produto.price.toLocaleString("pt-BR", {
                         style: "currency",
                         currency: "BRL",
                       })}
                     </p>
                     <button
                       className="p-2 text-sm font-bold bg-[#FF870C] hover:bg-[#ff9b37] active:bg-[#b96816] rounded-full"
-                      onClick={() => handleAddToCart(book.id)}
+                      onClick={() => handleAddToCart(produto.id)}
                     >
                       Adicionar ao Carrinho
                     </button>
