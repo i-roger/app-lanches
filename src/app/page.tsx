@@ -215,7 +215,7 @@ export default function Home() {
     }).join("")
 
     const message = encodeURIComponent(cartItems)
-    const celular = 21999055127
+    const celular = +5521999055127
     console.log(cartItems)
 
     // window.open(`https://wa.me/${celular}?text=${message} Endereço: ${addressInput.value} | \n Total: ${totalCart}`, "_blank")
