@@ -1,6 +1,6 @@
 // Regra dos Produtos
 
-export interface IBook {
+export interface Iproduto {
     id: string;
     title: string;
     descricao: string;
@@ -10,7 +10,7 @@ export interface IBook {
   }
   
 export interface IShoppingCartItem {
-    product: IBook;
+    product: Iproduto;
     quantity: number;
 }
 
