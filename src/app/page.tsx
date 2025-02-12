@@ -4,14 +4,13 @@ import Navbar from "@/app/components/navbar";
 import Image from "next/image";
 import { ulid } from 'ulid';
 
-// Import Swiper styles
+// Importar Swiper se for utilizar "carousel"
 import "swiper/css";
 import "swiper/css/pagination";
 
 import "@/app/components/swiperCarousel/styles.css";
 
-// import required modules
-
+// Importar as interfaces
 import { Iproduto, IShoppingCartItem } from "@/app/interfaces/interfaces";
 
 const produtos: Iproduto[] = [
@@ -97,7 +96,7 @@ export default function Home() {
       (item) => item.product.id === id
     );
 
-    // if produto is in the shopping cart
+    // Se o produto está no shoppingcart
     if (alreadyInShoppingCart) {
       const newShoppingCart: IShoppingCartItem[] = shoppingCart.map((item) => {
         if (item.product.id === id)
@@ -111,7 +110,7 @@ export default function Home() {
       return;
     }
 
-    // if produto is not in the shopping cart
+    // Se produto não está no shoppingcart
 
     const cartItem: IShoppingCartItem = {
       product: produto!,
@@ -139,7 +138,7 @@ export default function Home() {
       return;
     }
 
-    //if there is only one item with the id in the cart
+    //Se tem apenas um item com o id no shoppingcart
     const newShoppingCart: IShoppingCartItem[] = shoppingCart.filter(
       (item) => item.product.id !== id
     );
